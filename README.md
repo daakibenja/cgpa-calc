@@ -1,4 +1,4 @@
-# cgpa-calc
+# CGPA CALC
 A simple yet powerful CGPA calculator and forecaster 
 
 ## Features 
