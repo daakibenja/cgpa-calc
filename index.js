@@ -7,5 +7,18 @@ class CgpaCalc {
 }
 
 class CourseUnit {
-  constructor(name, creditUnits, grade) {}
+  constructor(name, creditUnits, grade) {
+    this.name = name;
+    this.creditUnits = creditUnits;
+    this.grade = grade;
+  }
+  getGradePoint() {}
+}
+
+function gradeToPoints(grade) {
+  switch (grade) {
+    case "A+":
+    case "A":
+      return 5;
+  }
 }
