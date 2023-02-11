@@ -44,6 +44,7 @@ class CgpaCalc {
     }
     this.courseTree = academicYears;
   }
+  printCourseTree() {}
 }
 
 class CourseUnit {
