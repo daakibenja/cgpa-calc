@@ -1,8 +1,26 @@
 class CgpaCalc {
-  constructor() {
+  constructor(courseUnits = []) {
+    this.courseUnits = courseUnits;
     this.semesters;
     this.years;
     this.currentSemester;
+    this.courseTree;
+  }
+  addcourseUnit(courseUnit) {
+    this.courseUnits.push(courseUnit);
+  }
+
+  computeCGPA() {
+    var cumulativecUs = 0;
+    var cgpa = 0;
+    var CumulativeGpCuPdt = 0;
+    for (var i = 0; i < this.courseUnits.length; i++) {
+      var courseUnit = this.courseUnits[i];
+      cumulativecUs += courseUnit.creditUnits;
+      CumulativeGpCuPdt += courseUnit.getGradePoint() * courseUnit.creditUnits;
+    }
+    cgpa = CumulativeGpCuPdt / cumulativecUs;
+    return cgpa;
   }
 }
 
@@ -38,10 +56,9 @@ class CourseUnit {
     if (this.grade) return;
   }
   getGradePoint() {
-    
     if (this.grade) return gradeToPoints(this.grade);
     else if (this.mark) return gradeToPoints(markToGrade(this.mark));
-    else return 0.00;
+    else return 0.0;
   }
 }
 
@@ -119,7 +136,26 @@ function randomMark(max) {
   (Math.floor(Math.random() * 100) % 10) % max;
 }
 
-var course = new CourseUnit("Foundatons of IS", 3, 77, 1, "2019/2020");
-var course1 = new CourseUnit("Foundatons of IS", 3, "A", 1, "2019/2020");
+var courses = [];
+courses.push(
+  //Year one semester one
+  new CourseUnit("Foundatons of IS", 3, 77, 1, "2019/2020"),
+  new CourseUnit("Problem Solving", 3, "B+", 1, "2019/2020"),
+  new CourseUnit("Communication skills", 4, "A", 1, "2019/2020"),
+  new CourseUnit("Computer literacy", 4, "A", 1, "2019/2020"),
+  new CourseUnit("Structured Programming", 3, "A+", 1, "2019/2020"),
 
-console.log(course.getGradePoint(), course1.getGradePoint());
+  //Year one Semester two
+  new CourseUnit("System Analysis & Design", 4, "B", 2, "2019/2020"),
+  new CourseUnit("Internet Programming", 4, "B+", 2, "2019/2020"),
+  new CourseUnit("Numerical Methods", 3, "A", 2, "2019/2020"),
+  new CourseUnit("Software Development principles", 4, "B", 2, "2019/2020"),
+  new CourseUnit("Database &Information MGT", 4, "B+", 1, "2019/2020"),
+
+  //Year one Recess
+  new CourseUnit("Software Engineering Project 1", 5, "B+", 3, "2019/2020")
+);
+var cgpaCalc = new CgpaCalc(courses);
+
+var cgpa = cgpaCalc.computeCGPA();
+console.log(cgpa);
