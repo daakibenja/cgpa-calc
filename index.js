@@ -61,8 +61,31 @@ class CgpaCalc {
       var semesters = Object.keys(this.courseTree[academicYears[i]]);
       semesters = semesters.sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
 
-      for(var i=0 ; i< semesters.length ; i++){
-        
+      for (var j = 0; j < semesters.length; j++) {
+        console.log(`\n************ Semester ${semesters[j]} ***********`);
+        var courses = this.courseTree[academicYears[i]][semesters[j]];
+        // console.log(courses);
+
+        var cumulativecUs = 0;
+        var cgpa = 0;
+        var CumulativeGpCuPdt = 0;
+        for (var i = 0; i < courses.length; i++) {
+          var courseUnit = courses[i];
+          cumulativecUs += courseUnit.creditUnits;
+          CumulativeGpCuPdt +=
+            courseUnit.getGradePoint() * courseUnit.creditUnits;
+          var x = "";
+
+          console.log(
+            `${courseUnit.name
+              .toString()
+              .padEnd(30, " ")}${courseUnit.getMark()}${courseUnit.grade
+              } \t${courseUnit.getGradePoint()}`
+          );
+        }
+        cgpa = CumulativeGpCuPdt / cumulativecUs;
+        console.log(`***        CPA ${cgpa} `);
+        console.log("______________________________________________");
       }
     }
   }
@@ -97,7 +120,7 @@ class CourseUnit {
   // Getters
   getMark() {
     if (this.mark) return this.mark;
-    if (this.grade) return;
+    if (this.grade) return gradeToMark(this.grade);
   }
   getGradePoint() {
     if (this.grade) return gradeToPoints(this.grade);
@@ -183,8 +206,8 @@ function randomMark(max) {
 var courses = [];
 courses.push(
   //Year one semester one
-  new CourseUnit("Foundatons of IS", 3, 77, 1, "2020/2021"),
-  new CourseUnit("Problem Solving", 3, "B+", 1, "2021/2022"),
+  new CourseUnit("Foundatons of IS", 3, 77, 1, "2019/2020"),
+  new CourseUnit("Problem Solving", 3, "B+", 1, "2019/2020"),
   new CourseUnit("Communication skills", 4, "A", 1, "2019/2020"),
   new CourseUnit("Computer literacy", 4, "A", 1, "2019/2020"),
   new CourseUnit("Structured Programming", 3, "A+", 1, "2019/2020"),
