@@ -7,10 +7,12 @@ class CgpaCalc {
 }
 
 class CourseUnit {
-  constructor(name, creditUnits, grade) {
+  constructor(name, creditUnits, grade, semester, academicYear = "") {
     this.name = name;
     this.creditUnits = creditUnits;
     this.grade = grade;
+    this.semester = semester
+    this.academicYear = academicYear;
   }
   getGradePoint() {
     return gradeToPoints(this.grade);
