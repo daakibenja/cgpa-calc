@@ -7,11 +7,29 @@ class CgpaCalc {
 }
 
 class CourseUnit {
-  constructor(name, creditUnits, grade, semester, academicYear = "") {
+  /**
+   *Creates an instance of a course unit
+   * @param {String} name The name of the course unit
+   * @param {Number} creditUnits The number of credit units in the course unit
+   * @param {Number|String} gradeOrMark The grade or mark you obtained in the course unit
+   * @param {Number} semester The semester in the academic year
+   * @param {String} academicYear The academic year
+   */
+  constructor(
+    name = "",
+    creditUnits = "",
+    gradeOrMark = "",
+    semester = "",
+    academicYear = ""
+  ) {
     this.name = name;
     this.creditUnits = creditUnits;
-    this.grade = grade;
-    this.semester = semester
+    if (Number.isNaN(gradeOrMark)) {
+      this.grade = gradeOrMark;
+    } else {
+      this.mark = gradeOrMark;
+    }
+    this.semester = semester;
     this.academicYear = academicYear;
   }
   getGradePoint() {
