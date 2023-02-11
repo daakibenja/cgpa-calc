@@ -45,8 +45,26 @@ class CgpaCalc {
     this.courseTree = academicYears;
   }
   printCourseTree() {
-    var academicYears = Object.keys(this.courseTree)
-    console.log(academicYears);
+    console.log("...Generating tree ...");
+    var academicYears = Object.keys(this.courseTree);
+    academicYears = academicYears.sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
+    for (var i = 0; i < academicYears.length; i++) {
+      console.log(
+        "\n\n_________________________________________________________________"
+      );
+      console.log(`               Academic Year ${academicYears[i]} `);
+      console.log(
+        "__________________________________________________________________"
+      );
+
+      // Get semesters
+      var semesters = Object.keys(this.courseTree[academicYears[i]]);
+      semesters = semesters.sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
+
+      for(var i=0 ; i< semesters.length ; i++){
+        
+      }
+    }
   }
 }
 
@@ -165,8 +183,8 @@ function randomMark(max) {
 var courses = [];
 courses.push(
   //Year one semester one
-  new CourseUnit("Foundatons of IS", 3, 77, 1, "2019/2020"),
-  new CourseUnit("Problem Solving", 3, "B+", 1, "2019/2020"),
+  new CourseUnit("Foundatons of IS", 3, 77, 1, "2020/2021"),
+  new CourseUnit("Problem Solving", 3, "B+", 1, "2021/2022"),
   new CourseUnit("Communication skills", 4, "A", 1, "2019/2020"),
   new CourseUnit("Computer literacy", 4, "A", 1, "2019/2020"),
   new CourseUnit("Structured Programming", 3, "A+", 1, "2019/2020"),
@@ -187,4 +205,4 @@ var cgpa = cgpaCalc.computeCGPA();
 cgpaCalc.buildCourseTree();
 
 // console.log(cgpa, cgpaCalc.courseTree);
-cgpaCalc.printCourseTree()
+cgpaCalc.printCourseTree();
