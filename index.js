@@ -44,7 +44,10 @@ class CgpaCalc {
     }
     this.courseTree = academicYears;
   }
-  printCourseTree() {}
+  printCourseTree() {
+    var academicYears = Object.keys(this.courseTree)
+    console.log(academicYears);
+  }
 }
 
 class CourseUnit {
@@ -183,4 +186,5 @@ var cgpaCalc = new CgpaCalc(courses);
 var cgpa = cgpaCalc.computeCGPA();
 cgpaCalc.buildCourseTree();
 
-console.log(cgpa, cgpaCalc.courseTree);
+// console.log(cgpa, cgpaCalc.courseTree);
+cgpaCalc.printCourseTree()
