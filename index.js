@@ -4,7 +4,7 @@ class CgpaCalc {
     this.semesters;
     this.years;
     this.currentSemester;
-    this.courseTree;
+    this.courseTree = {};
   }
   addcourseUnit(courseUnit) {
     this.courseUnits.push(courseUnit);
@@ -22,8 +22,43 @@ class CgpaCalc {
     cgpa = CumulativeGpCuPdt / cumulativecUs;
     return cgpa;
   }
-}
+  buildCourseTree() {
+    // First group by academic years
+    var academicYears = {};
+    for (var i = 0; i < this.courseUnits.length; i++) {
+      var courseUnit = this.courseUnits[i];
 
+      if (!academicYears[`${courseUnit.academicYear}`]) {
+        academicYears[`${courseUnit.academicYear}`] = {};
+      }
+
+      if (
+        !academicYears[`${courseUnit.academicYear}`][`${courseUnit.semester}`]
+      ) {
+        academicYears[`${courseUnit.academicYear}`][`${courseUnit.semester}`] =
+          [];
+      }
+      academicYears[`${courseUnit.academicYear}`][
+        `${courseUnit.semester}`
+      ].push(courseUnit);
+      // var academicYear = courseUnit.academicYear;
+      // var semester = courseUnit.semester;
+      // this.courseTree.academicYear.semester = courseUnit;
+    }
+    this.courseTree = academicYears;
+  }
+}
+class CourseTree {
+  constructor() {
+    this.academicYears = {};
+  }
+  addcourseUnit(courseUnit) {
+    this.academicYears[`"${courseUnit.academicYear}"`];
+    if (this.academicYears.includes(courseUnit.academicYear)) {
+      this.academicYears.push(courseUnit.academicYear);
+    }
+  }
+}
 class CourseUnit {
   /**
    *Creates an instance of a course unit
@@ -150,7 +185,7 @@ courses.push(
   new CourseUnit("Internet Programming", 4, "B+", 2, "2019/2020"),
   new CourseUnit("Numerical Methods", 3, "A", 2, "2019/2020"),
   new CourseUnit("Software Development principles", 4, "B", 2, "2019/2020"),
-  new CourseUnit("Database &Information MGT", 4, "B+", 1, "2019/2020"),
+  new CourseUnit("Database &Information MGT", 4, "B+", 2, "2019/2020"),
 
   //Year one Recess
   new CourseUnit("Software Engineering Project 1", 5, "B+", 3, "2019/2020")
@@ -158,4 +193,6 @@ courses.push(
 var cgpaCalc = new CgpaCalc(courses);
 
 var cgpa = cgpaCalc.computeCGPA();
-console.log(cgpa);
+cgpaCalc.buildCourseTree();
+
+console.log(cgpa, cgpaCalc.courseTree);
