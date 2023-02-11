@@ -41,24 +41,11 @@ class CgpaCalc {
       academicYears[`${courseUnit.academicYear}`][
         `${courseUnit.semester}`
       ].push(courseUnit);
-      // var academicYear = courseUnit.academicYear;
-      // var semester = courseUnit.semester;
-      // this.courseTree.academicYear.semester = courseUnit;
     }
     this.courseTree = academicYears;
   }
 }
-class CourseTree {
-  constructor() {
-    this.academicYears = {};
-  }
-  addcourseUnit(courseUnit) {
-    this.academicYears[`"${courseUnit.academicYear}"`];
-    if (this.academicYears.includes(courseUnit.academicYear)) {
-      this.academicYears.push(courseUnit.academicYear);
-    }
-  }
-}
+
 class CourseUnit {
   /**
    *Creates an instance of a course unit
