@@ -32,6 +32,11 @@ class CourseUnit {
     this.semester = semester;
     this.academicYear = academicYear;
   }
+  // Getters
+  getMark() {
+    if (this.mark) return this.mark;
+    if (this.grade) return;
+  }
   getGradePoint() {
     return gradeToPoints(this.grade);
   }
@@ -63,4 +68,37 @@ function gradeToPoints(grade) {
     default:
       return 0;
   }
+}
+
+function gradeToMark(grade) {
+  switch (grade) {
+    case "A+":
+      return 90 + randomMark(10);
+    case "A":
+      return 80 + randomMark(10);
+    case "B+":
+      return 75 + randomMark(5);
+    case "B":
+      return 70 + randomMark(5);
+    case "C+":
+      return 65 + randomMark(5);
+    case "C":
+      return 60 + randomMark(5);
+    case "D+":
+      return 55 + randomMark(5);
+    case "D":
+      return 50 + randomMark(5);
+    case "E":
+      return 40 + randomMark(10);
+    case "E-":
+      return 0 + randomMark(30);
+    case "F":
+      return 0;
+    default:
+      return 0;
+  }
+}
+
+function randomMark(max) {
+  (Math.floor(Math.random() * 100) % 10) % max;
 }
