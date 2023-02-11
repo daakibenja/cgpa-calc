@@ -24,7 +24,7 @@ class CourseUnit {
   ) {
     this.name = name;
     this.creditUnits = creditUnits;
-    if (Number.isNaN(gradeOrMark)) {
+    if (!Number.parseInt(gradeOrMark)) {
       this.grade = gradeOrMark;
     } else {
       this.mark = gradeOrMark;
@@ -38,6 +38,7 @@ class CourseUnit {
     if (this.grade) return;
   }
   getGradePoint() {
+    
     if (this.grade) return gradeToPoints(this.grade);
     else if (this.mark) return gradeToPoints(markToGrade(this.mark));
     else return 0.00;
@@ -119,6 +120,6 @@ function randomMark(max) {
 }
 
 var course = new CourseUnit("Foundatons of IS", 3, 77, 1, "2019/2020");
-var course1 = new CourseUnit("Foundatons of IS", 3, "A+", 1, "2019/2020");
+var course1 = new CourseUnit("Foundatons of IS", 3, "A", 1, "2019/2020");
 
 console.log(course.getGradePoint(), course1.getGradePoint());
