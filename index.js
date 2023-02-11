@@ -12,7 +12,9 @@ class CourseUnit {
     this.creditUnits = creditUnits;
     this.grade = grade;
   }
-  getGradePoint() {}
+  getGradePoint() {
+    return gradeToPoints(this.grade);
+  }
 }
 
 function gradeToPoints(grade) {
@@ -37,6 +39,8 @@ function gradeToPoints(grade) {
     case "E-":
       return 1;
     case "F":
+      return 0;
+    default:
       return 0;
   }
 }
