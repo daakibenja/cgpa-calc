@@ -204,6 +204,7 @@ function randomMark(max) {
 }
 
 var courses = [];
+
 courses.push(
   //Year one semester one
   new CourseUnit("Foundatons of IS", 3, 77, 1, "2019/2020"),
@@ -229,3 +230,14 @@ cgpaCalc.buildCourseTree();
 
 // console.log(cgpa, cgpaCalc.courseTree);
 cgpaCalc.printCourseTree();
+
+
+// //register service worker
+// if ("serviceWorker" in navigator) {
+//   window.addEventListener("load", function () {
+//     navigator.serviceWorker
+//       .register("/serviceworker.js")
+//       .then((res) => console.log("registered"))
+//       .catch((err) => console.log("not registered", err));
+//   });
+// }
